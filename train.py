@@ -41,7 +41,7 @@ model.compile(
 model.fit(train_dataset, epochs=num_epochs, callbacks=[tensorboard])
 model.summary()
 
-model.save_weights('weights/fcn_20191021')
+model.save_weights(weight_path+'fcn_20191021')
 
 
 

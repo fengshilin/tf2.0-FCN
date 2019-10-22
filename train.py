@@ -9,7 +9,7 @@ from model import MyModel
 from dataload import handle_data
 from config import num_epochs, learning_rate, batch_size, weight_path, image_shape, train_dir
 from dataload import train_generator
-
+from deeplab import DeepLabV3Plus
 
 tensorboard = tf.keras.callbacks.TensorBoard(
     log_dir='logs/{}'.format("demo"),
@@ -28,8 +28,8 @@ train_dataset = tf.data.Dataset.from_generator(
 train_dataset = train_dataset.shuffle(buffer_size=len(train_list_dir))
 train_dataset = train_dataset.batch(batch_size)
 
-
-model = MyModel(2)
+model = DeepLabV3Plus(image_shape[0], image_shape[1], nclasses=2)
+# model = MyModel(2)
 # model.load_weights(weight_path+'fcn_20191021')
 
 optimizer = tf.keras.optimizers.SGD(learning_rate=learning_rate)
@@ -41,7 +41,7 @@ model.compile(
 model.fit(train_dataset, epochs=num_epochs, callbacks=[tensorboard])
 model.summary()
 
-model.save_weights(weight_path+'fcn_20191021')
+model.save_weights('weights/fcn_20191021')
 
 
 

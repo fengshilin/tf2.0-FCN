@@ -7,7 +7,7 @@ import numpy as np
 from model import MyModel
 from config import num_epochs, learning_rate, batch_size, weight_path, image_shape, test_dir
 from dataload import test_generator
-
+from deeplab import DeepLabV3Plus
 
 def write_img(pred_images, filename):
 
@@ -26,7 +26,8 @@ test_dataset = tf.data.Dataset.from_generator(
     test_generator, tf.float32, tf.TensorShape([None, None, None]))
 test_dataset = test_dataset.batch(5)
 
-model = MyModel(2)
+model = DeepLabV3Plus(image_shape[0], image_shape[1], nclasses=2)
+# model = MyModel(2)
 model.load_weights(weight_path+'fcn_20191021')
 
 test_list_dir = os.listdir(test_dir)

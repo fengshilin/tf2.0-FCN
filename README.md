@@ -6,4 +6,6 @@
 
 训练所用的数据集为kitti，下载连接为https://s3.eu-central-1.amazonaws.com/avg-kitti/data_road.zip
 
+在训练过程中会自动下载vgg模型与resnet模型，下载速度有点慢，github中提供了两个.h5文件，linux用户放置在/home/dennis/.keras/model/目录下即可，若没有这个目录，请先运行代码，到下载界面后再查看是否已经生成了该目录。
+
 

@@ -4,7 +4,7 @@
 
 拉下代码后，需要根据config的路径,放置训练集与测试集；
 
-训练所用的数据集为kitti，下载连接为https://s3.eu-central-1.amazonaws.com/avg-kitti/data_road.zip
+训练所用的数据集为kitti，下载连接为https://s3.eu-central-1.amazonaws.com/avg-kitti/data_road.zip,如果下载慢，可以去这里获取网盘连接：https://blog.csdn.net/weixin_43162240/article/details/102659646
 
 在训练过程中会自动下载vgg模型与resnet模型，下载速度有点慢，可以在这里下载（链接：https://pan.baidu.com/s/1Pc42p404uViizGYRUpHSoQ&shfl=sharepset 
 提取码：l443）

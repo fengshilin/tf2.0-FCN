@@ -2,6 +2,12 @@
 
 代码为适合入门的tensorflow2.0版本fcn32s。用tensorflow2.0的accury计算的精确率能达到91%。
 
+FCN网络结构
+![](https://img-blog.csdnimg.cn/20191021141059420.png)
+
+VGG16网络结构
+![在这里插入图片描述](https://img-blog.csdnimg.cn/2019102418154872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzE2MjI0MA==,size_16,color_FFFFFF,t_70)
+
 拉下代码后，需要根据config的路径,放置训练集与测试集；
 
 训练所用的数据集为kitti，下载连接为https://s3.eu-central-1.amazonaws.com/avg-kitti/data_road.zip

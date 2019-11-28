@@ -19,12 +19,17 @@ tensorboard = tf.keras.callbacks.TensorBoard(
     embeddings_metadata=None, embeddings_data=None, update_freq=500
 )
 
+# 生成检查点，可以每一轮保存一次参数， 不用训练完再保存
+checkpoint = tf.keras.callbacks.ModelCheckpoint(weight_path+'fcn_20191021.ckpt',monitor='loss', 
+                                                    save_weights_only=True,verbose=1,
+                                                    save_best_only=True,save_freq='epoch',mode = 'min')
+                                                    
+
+# 生成训练数据集
 train_list_dir = os.listdir(train_dir)
 train_dataset = tf.data.Dataset.from_generator(
     train_generator, (tf.float32, tf.float32), (tf.TensorShape([None, None, None]), tf.TensorShape([None, None, None])))
 
-# 对数据集中每个数据做handle_data
-# train_dataset = train_dataset.map(handle_data)
 train_dataset = train_dataset.shuffle(buffer_size=len(train_list_dir))
 train_dataset = train_dataset.batch(batch_size)
 
@@ -32,16 +37,15 @@ model = DeepLabV3Plus(image_shape[0], image_shape[1], nclasses=2)
 # model = MyModel(2)
 # model.load_weights(weight_path+'fcn_20191021')
 
-optimizer = tf.keras.optimizers.SGD(learning_rate=learning_rate)
+optimizer = tf.keras.optimizers.SGD(learning_rate=learning_rate, decay=0.0001)
 model.compile(
     optimizer=optimizer,
     loss=tf.compat.v2.nn.softmax_cross_entropy_with_logits,
     metrics=['accuracy']
 )
-model.fit(train_dataset, epochs=num_epochs, callbacks=[tensorboard])
+model.fit(train_dataset, epochs=num_epochs, callbacks=[tensorboard, checkpoint])
 model.summary()
 
-model.save_weights('weights/fcn_20191021')
 
 
 

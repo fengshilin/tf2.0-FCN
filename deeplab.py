@@ -91,13 +91,7 @@ def DeepLabV3Plus(img_height, img_width, nclasses=2):
     x = Upsample(x, [img_height, img_width])
 
     x = Conv2D(nclasses, (1, 1), name='output_layer')(x)
-    '''
-    x = Activation('softmax')(x) 
-    tf.losses.SparseCategoricalCrossentropy(from_logits=True)
-    Args:
-        from_logits: Whether `y_pred` is expected to be a logits tensor. By default,
-        we assume that `y_pred` encodes a probability distribution.
-    '''
+    
     model = Model(inputs=base_model.input, outputs=x, name='DeepLabV3_Plus')
     print(f'*** Output_Shape => {model.output_shape} ***')
     return model
